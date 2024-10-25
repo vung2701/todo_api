@@ -1,9 +1,8 @@
-// routes/authRoutes.js
-const express = require('express');
-const { check } = require('express-validator');
-const { registerUser, loginUser } = require('../controllers/AuthController');
-
+import express from 'express';
+import { registerUser } from '../controllers/userController';
+import { loginUser } from '../controllers/userController';
 const router = express.Router();
+
 
 // Đăng ký
 router.post('/register', [

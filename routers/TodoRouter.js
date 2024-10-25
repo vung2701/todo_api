@@ -1,7 +1,7 @@
 // routes/todoRoutes.js
-const express = require('express');
-const authMiddleware = require('../middlewares/authMiddleware');
-const { getTodos, createTodo, updateTodo, deleteTodo } = require('../controllers/TodoController');
+import express from 'express';
+import { authMiddleware } from '../middlewares/AuthMiddleware';
+import { getTodos, createTodo, updateTodo, deleteTodo } from '../controllers/TodoController';
 
 const router = express.Router();
 
@@ -17,4 +17,4 @@ router.put('/:id', authMiddleware, updateTodo);
 // Xóa Todo
 router.delete('/:id', authMiddleware, deleteTodo);
 
-module.exports = router;
+export default router;
