@@ -2,8 +2,6 @@ import express from 'express';
 import { registerUser } from '../controllers/userController';
 import { loginUser } from '../controllers/userController';
 const router = express.Router();
-
-
 // Đăng ký
 router.post('/register', [
     check('name', 'Tên là bắt buộc').not().isEmpty(),
@@ -17,4 +15,4 @@ router.post('/login', [
     check('password', 'Mật khẩu là bắt buộc').exists()
 ], loginUser);
 
-module.exports = router;
+export default userRouter;
