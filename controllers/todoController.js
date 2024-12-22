@@ -1,7 +1,6 @@
 // controllers/todoController.js
 import Todo from '../models/Todo.js';
 
-// Lấy tất cả Todo của user
 export const getTodos = async (req, res) => {
   try {
     const todos = await Todo.find({ userId: req.userId });
