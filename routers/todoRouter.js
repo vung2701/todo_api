@@ -4,13 +4,13 @@ import { authMiddleware } from '../middlewares/AuthMiddleware.js';
 
 const todoRouter = express.Router();
 
-router.get('/', authMiddleware, getTodos);
+todoRouter.get('/', authMiddleware, getTodos);
 
-router.post('/', authMiddleware, createTodo);
+todoRouter.post('/', authMiddleware, createTodo);
 
-router.put('/:id', authMiddleware, updateTodo);
+todoRouter.put('/:id', authMiddleware, updateTodo);
 
-router.delete('/:id', authMiddleware, deleteTodo);
+todoRouter.delete('/:id', authMiddleware, deleteTodo);
 
 export default todoRouter;
 
