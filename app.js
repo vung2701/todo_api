@@ -7,7 +7,6 @@ import routes from './routers/routes.js'; // Đường dẫn đúng tới file r
 
 import { fileURLToPath } from 'url';
 import path from 'path';
-import userRouter from './routers/userRouter.js';
 
 // Định nghĩa __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -15,19 +14,20 @@ const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
+// Kết nối tới MongoDB
+connectDB();
+
 const app = express();
 app.use(cors());
-app.use(express.urlencoded({ extended: true }));
-const PORT = process.env.PORT || 3200;
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+const PORT = 3200;
 
 app.disable('x-powered-by');
 
 // Middleware
 app.use(bodyParser.json());
-
-// Kết nối tới MongoDB
-connectDB();
-
 
 app.use('/api/v1', routes);
 
@@ -35,6 +35,7 @@ app.use('/api/v1', routes);
 app.get('/', (req, res) =>
   res.send(`Server is running on port ${PORT}`)
 );
+
 
 // Start server
 app.listen(PORT, () => {
