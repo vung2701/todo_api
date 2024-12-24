@@ -19,13 +19,18 @@ const adminJs = new AdminJS({
 // Tạo router AdminJS với xác thực cơ bản
 const adminRouter = AdminJSExpress.buildAuthenticatedRouter(adminJs, {
   authenticate: async (email, password) => {
-    if (email === 'admin@example.com' && password === 'password') {
-      return { email };
+    try {
+      const user = await User.findOne({ email });
+      if (user &&  user.comparePassword(password) && user.role === 'admin') {
+        return user;
+      }
+    } catch (error) {
+      console.error('Authentication error:', error);
     }
     return null;
   },
-  cookieName: 'adminjs',
-  cookiePassword: 'supersecret',
+  cookieName: process.env.ADMIN_COOKIE_NAME || 'adminjs',
+  cookiePassword: process.env.ADMIN_COOKIE_PASSWORD || 'supersecret',
 });
 
 export { adminJs, adminRouter };
