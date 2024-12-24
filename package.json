@@ -8,6 +8,9 @@
     "dev": "kill-port 3200 && nodemon app.js"
   },
   "dependencies": {
+    "@adminjs/express": "^5.1.0",
+    "@adminjs/mongoose": "^3.0.3",
+    "adminjs": "^6.8.7",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
