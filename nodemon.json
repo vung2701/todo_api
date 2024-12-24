@@ -12,10 +12,6 @@
     "env": {
         "NODE_ENV": "development"
     },
-    "events": {
-        "restart": "kill-port 3200",
-        "crash": "kill-port 3200"
-    },
     "delay": "2500",
     "verbose": true
 }
