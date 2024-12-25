@@ -7,12 +7,12 @@ import routes from './routers/routes.js'; // Đường dẫn đúng tới file r
 import { adminJs, adminRouter } from './admin/admin.js';
 import { fileURLToPath } from 'url';
 import path from 'path';
+dotenv.config();
 
 // Định nghĩa __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config();
 
 // Kết nối tới MongoDB
 connectDB();

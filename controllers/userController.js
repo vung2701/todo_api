@@ -30,22 +30,18 @@ export const loginUser = async (req, res) => {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
     
-    console.log('Generating access and refresh tokens');
     const accessToken = generateAccessToken(user.email);
     const refreshToken = generateRefreshToken(user.email);
 
-    console.log('Access Token:', accessToken);
-    console.log('Refresh Token:', refreshToken);
 
-    user.refreshToken = refreshToken; // Save the refresh token in the database
+    user.refreshToken = refreshToken; 
     await user.save();
 
-    // Set refresh token as an HTTP-only cookie
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      maxAge: 7 * 24 * 60 * 60 * 1000, 
     });
 
     res.status(200).json({ accessToken });
