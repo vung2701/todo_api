@@ -30,4 +30,4 @@ const TodoSchema = new mongoose.Schema({
 
 TodoSchema.set('toJSON', { getters: true, virtuals: false });
 
-module.exports = mongoose.model('Todo', TodoSchema);
+export default mongoose.model('Todo', TodoSchema);
