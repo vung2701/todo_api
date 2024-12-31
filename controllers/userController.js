@@ -43,8 +43,13 @@ export const loginUser = async (req, res) => {
       sameSite: 'strict',
       maxAge: 7 * 24 * 60 * 60 * 1000, 
     });
+    const sanitizedUser = user.toJson();
 
-    res.status(200).json({ accessToken });
+    // Return response with access token and user information
+    res.status(200).json({
+      accessToken,
+      user: sanitizedUser,
+    });
   } catch (error) {
     console.error('Login User Error:', error);
     res.status(500).json({ message: 'Server error' });

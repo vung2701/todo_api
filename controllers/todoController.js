@@ -1,4 +1,4 @@
-// controllers/todoController.js
+// services/todoService.js
 import Todo from '../models/Todo.js';
 
 export const getTodos = async (req, res) => {

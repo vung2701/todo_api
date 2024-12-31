@@ -24,6 +24,13 @@ UserSchema.pre('save', async function (next) {
   }
 });
 
+UserSchema.methods.toJson = function () {
+  const user = this.toObject();
+  delete user.password;
+  delete user.refreshToken;
+  return user;
+};
+
 // Method to compare password for login
 UserSchema.methods.comparePassword = async function (password) {
   try {
