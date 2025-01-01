@@ -22,27 +22,6 @@ connectDB();
 const app = express();
 const PORT = 3200;
 
-// Swagger configuration
-const swaggerOptions = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'API Documentation',
-      version: '1.0.0',
-      description: 'API documentation for the application',
-    },
-    servers: [
-      {
-        url: `http://localhost:${PORT}/api/v1`,
-      },
-    ],
-  },
-  apis: ['./routers/*.js'], // Path to your route files
-};
-
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
-
-// Middleware and routes in proper order
 
 // 1. CORS
 app.use(cors());
@@ -50,8 +29,6 @@ app.use(cors());
 // 2. AdminJS middleware
 app.use(adminJs.options.rootPath, adminRouter);
 
-// 3. Swagger middleware
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // 4. BodyParser middleware
 app.use(bodyParser.json());
