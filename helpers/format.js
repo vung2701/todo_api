@@ -1,8 +1,4 @@
-/**
- * Chuyển đổi ngày từ định dạng dd/mm/yyyy sang ISO (yyyy-mm-dd)
- * @param {string} dateStr - Ngày cần chuyển đổi (định dạng dd/mm/yyyy)
- * @returns {Date|null} - Đối tượng Date hoặc null nếu sai định dạng
- */
+
 export const formatDateToISO = (dateStr) => {
   if (!dateStr || typeof dateStr !== 'string') return null;
 

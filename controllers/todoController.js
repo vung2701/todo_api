@@ -43,9 +43,27 @@ export const updateTodo = async (req, res) => {
   const { title, completed, startDate, endDate, status } = req.body;
 
   try {
+    const formattedStartDate = startDate ? formatDateToISO(startDate) : undefined;
+    const formattedEndDate = endDate ? formatDateToISO(endDate) : undefined;
+
+    // Kiểm tra định dạng ngày hợp lệ
+    if ((startDate && !formattedStartDate) || (endDate && !formattedEndDate)) {
+      return res.status(400).json({ message: 'Invalid date format (dd/mm/yyyy required)' });
+    }
+
+    // Tạo object cập nhật
+    const updateFields = {
+      ...(title && { title }),
+      ...(completed !== undefined && { completed }),
+      ...(formattedStartDate && { startDate: formattedStartDate }),
+      ...(formattedEndDate && { endDate: formattedEndDate }),
+      ...(status !== undefined && { status }),
+    };
+
+    // Cập nhật Todo
     const todo = await Todo.findOneAndUpdate(
       { _id: id, userId: req.userId },
-      { title, completed, startDate, endDate, status },
+      updateFields,
       { new: true }
     );
 

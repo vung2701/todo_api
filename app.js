@@ -2,8 +2,6 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import swaggerJsDoc from 'swagger-jsdoc';
-import swaggerUi from 'swagger-ui-express';
 import connectDB from './config/db.js';
 import routes from './routers/routes.js';
 import { adminJs, adminRouter } from './admin/admin.js';
@@ -21,7 +19,6 @@ connectDB();
 
 const app = express();
 const PORT = 3200;
-
 
 // 1. CORS
 app.use(cors());
@@ -45,5 +42,4 @@ app.get('/', (req, res) =>
 // Start server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
-  console.log(`API documentation available at http://localhost:${PORT}/api-docs`);
 });
