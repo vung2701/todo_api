@@ -1,5 +1,5 @@
 import express from 'express';
-import { getTodos, createTodo, updateTodo, deleteTodo } from '../controllers/TodoController.js';
+import { getTodos, createTodo, updateTodo, deleteTodo } from '../controllers/todoController.js';
 import { verifyAccessToken } from '../middlewares/AuthMiddleware.js';
 
 const todoRouter = express.Router();

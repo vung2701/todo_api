@@ -1,6 +1,6 @@
-// services/todoService.js
 import Todo from '../models/Todo.js';
 
+// Lấy danh sách Todos
 export const getTodos = async (req, res) => {
   try {
     const todos = await Todo.find({ userId: req.userId });
@@ -12,11 +12,14 @@ export const getTodos = async (req, res) => {
 
 // Tạo Todo mới
 export const createTodo = async (req, res) => {
-  const { title } = req.body;
+  const { title, startDate, endDate, status } = req.body;
 
   try {
     const todo = new Todo({
       title,
+      startDate,
+      endDate,
+      status: status || Todo.schema.path('status').options.default,
       userId: req.userId,
     });
     await todo.save();
@@ -29,12 +32,12 @@ export const createTodo = async (req, res) => {
 // Cập nhật Todo
 export const updateTodo = async (req, res) => {
   const { id } = req.params;
-  const { title, completed } = req.body;
+  const { title, completed, startDate, endDate, status } = req.body;
 
   try {
     const todo = await Todo.findOneAndUpdate(
       { _id: id, userId: req.userId },
-      { title, completed },
+      { title, completed, startDate, endDate, status },
       { new: true }
     );
 
