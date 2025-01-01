@@ -1,4 +1,5 @@
 import Todo from '../models/Todo.js';
+import { formatDateToISO } from '../helpers/format.js';
 
 // Lấy danh sách Todos
 export const getTodos = async (req, res) => {
@@ -10,15 +11,22 @@ export const getTodos = async (req, res) => {
   }
 };
 
-// Tạo Todo mới
 export const createTodo = async (req, res) => {
   const { title, startDate, endDate, status } = req.body;
 
   try {
+    // Chuyển đổi startDate và endDate từ dd/mm/yyyy sang dạng ISO
+    const formattedStartDate = formatDateToISO(startDate);
+    const formattedEndDate = formatDateToISO(endDate);
+
+    if (!formattedStartDate || !formattedEndDate) {
+      return res.status(400).json({ message: 'Invalid date format (dd/mm/yyyy required)' });
+    }
+
     const todo = new Todo({
       title,
-      startDate,
-      endDate,
+      startDate: formattedStartDate,
+      endDate: formattedEndDate,
       status: status || Todo.schema.path('status').options.default,
       userId: req.userId,
     });

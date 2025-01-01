@@ -95,7 +95,7 @@ export const logoutUser = async (req, res) => {
     if (!user) {
       return res.status(403).json({ message: 'Invalid refresh token' });
     }
-
+    
     res.clearCookie('refreshToken', {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
