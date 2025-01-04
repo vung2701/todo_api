@@ -4,9 +4,9 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import connectDB from './config/db.js';
 import routes from './routers/routes.js';
-import { adminJs, adminRouter } from './admin/admin.js';
 import { fileURLToPath } from 'url';
 import path from 'path';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
@@ -18,13 +18,11 @@ const __dirname = path.dirname(__filename);
 connectDB();
 
 const app = express();
+app.use(cookieParser());
 const PORT = 3200;
 
 // 1. CORS
 app.use(cors());
-
-// 2. AdminJS middleware
-app.use(adminJs.options.rootPath, adminRouter);
 
 
 // 4. BodyParser middleware
