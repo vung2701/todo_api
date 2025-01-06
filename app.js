@@ -22,7 +22,10 @@ app.use(cookieParser());
 const PORT = 3200;
 
 // 1. CORS
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173', // Frontend URL
+  credentials: true, // Allow cookies and other credentials
+}));
 
 
 // 4. BodyParser middleware
