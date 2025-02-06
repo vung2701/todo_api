@@ -56,6 +56,9 @@ export const loginUser = async (req, res) => {
   }
 };
 
+
+
+
 export const refreshToken = async (req, res) => {
   const refreshToken = req.cookies.refreshToken; // Read refresh token from cookies
 
@@ -80,7 +83,6 @@ export const refreshToken = async (req, res) => {
 };
 
 export const logoutUser = async (req, res) => {
-  console.log('123');
   const refreshToken = req.cookies.refreshToken; // Read refresh token from cookies
   console.log('refreshToken', refreshToken);
   if (!refreshToken) {

@@ -1,11 +1,19 @@
 import Todo from '../models/Todo.js';
 import { formatDateToISO } from '../helpers/format.js';
+import { paginate } from '../helpers/utils.js';
 
-// Lấy danh sách Todos
+// Lấy danh sách Todos có phân trang
 export const getTodos = async (req, res) => {
   try {
-    const todos = await Todo.find({ userId: req.userId });
-    res.json(todos);
+    const { page = 1, limit = 10, sort } = req.query; 
+    const pageNumber = parseInt(page, 10);
+    const pageSize = parseInt(limit, 10);
+
+    const todos = await Todo.find({ userId: req.userId }).lean(); 
+
+    const paginatedData = paginate(todos, pageSize, pageNumber, sort);
+
+    res.json(paginatedData);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching todos', error });
   }
