@@ -5,9 +5,9 @@ import { paginate } from '../helpers/utils.js';
 // Lấy danh sách Todos có phân trang
 export const getTodos = async (req, res) => {
   try {
-    const { page = 1, limit = 10, sort } = req.query; 
+    const { page = 1, per_page = 10, sort } = req.query; 
     const pageNumber = parseInt(page, 10);
-    const pageSize = parseInt(limit, 10);
+    const pageSize = parseInt(per_page, 10);
 
     const todos = await Todo.find({ userId: req.userId }).lean(); 
 

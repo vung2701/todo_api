@@ -15,16 +15,16 @@ export function paginate(array, page_size, page_number, sort) {
         });
     }
     
-    let total_items = array.length;
-    let total_pages = Math.ceil(total_items / page_size);
+    let totalItems = array.length;
+    let totalPages = Math.ceil(totalItems / page_size);
     let from = (page_number - 1) * page_size + 1;
-    let to = Math.min(page_number * page_size, total_items);
+    let to = Math.min(page_number * page_size, totalItems);
     let items = array.slice(from - 1, to);
     
     return {
         items,
-        total_items,
-        totalPages: total_pages,
+        totalItems,
+        totalPages,
 		currenPage: page_number,
 		perPage: page_size,
         from,
